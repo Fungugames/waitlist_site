@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNGŪ - Web3 Gaming Platform Coming Soon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add favicon/logo link here -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fungal-dark': '#2a0c4e',
+                        'fungal-primary': '#7b2cbf',
+                        'fungal-light': '#e0aaff',
+                        'fungal-accent': '#ff9e00',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        fungi: ['"Press Start 2P"', 'cursive']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap');
+        
+        body {
+            background-color: #0f051d;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .fungi-logo {
+            font-family: '"Press Start 2P"', cursive;
+            text-shadow: 0 0 10px rgba(123, 44, 191, 0.7);
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #7b2cbf, 0 0 20px #7b2cbf;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 15px #e0aaff, 0 0 20px #e0aaff, 0 0 25px #e0aaff;
+            }
+        }
+        
+        .pixel-box {
+            border: 4px solid #7b2cbf;
+            position: relative;
+            box-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
+        }
+        
+        .pixel-box::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid #e0aaff;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .countdown-box {
+            background: rgba(42, 12, 78, 0.7);
+            border: 2px solid #ff9e00;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(123, 44, 191, 0.4);
+        }
+        
+        .email-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
+        }
+        
+        .submit-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(224, 170, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="px-6 py-4 flex justify-between items-center bg-[rgba(15,5,29,0.8)] backdrop-blur-sm relative">
+        <!-- Add logo image beside FUNGŪ text -->
+        <div class="flex items-center fungi-logo text-2xl text-fungal-light">
+            <img src="logo.png" alt="FUNGŪ Logo" class="h-8 w-8 mr-2">
+            FUNGŪ
+        </div>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6" id="desktopMenu">
+            <a href="#features" class="text-white hover:text-fungal-light transition">Features</a>
+            <a href="#countdown" class="text-white hover:text-fungal-light transition">Countdown</a>
+            <a href="#subscribe" class="text-white hover:text-fungal-light transition">Subscribe</a>
+        </div>
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white" id="mobileMenuButton" aria-label="Open menu">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        <!-- Mobile Menu -->
+        <div class="absolute top-full left-0 w-full bg-[rgba(15,5,29,0.97)] flex-col space-y-2 py-4 px-6 z-20 shadow-lg hidden" id="mobileMenu">
+            <a href="#features" class="block text-white hover:text-fungal-light transition">Features</a>
+            <a href="#countdown" class="block text-white hover:text-fungal-light transition">Countdown</a>
+            <a href="#subscribe" class="block text-white hover:text-fungal-light transition">Subscribe</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="flex-grow flex flex-col justify-center items-center text-center px-4 py-12 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-fungal-dark/20 to-fungal-dark"></div>
+            <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237b2cbf' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="text-6xl md:text-8xl mb-4 fungi-logo glow">FUNGŪ</div>
+                <div class="text-lg md:text-xl text-fungal-light mb-6">The future of decentralized gaming is growing...</div>
+            </div>
+            
+            <div class="pixel-box p-8 mb-12 bg-fungal-dark/80">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 text-white">WEB3 GAMING ECOSYSTEM COMING SOON</h1>
+                <p class="text-lg md:text-xl text-fungal-light mb-8">A revolutionary platform where gaming meets blockchain technology. Play, earn, and connect in a decentralized world.</p>
+                
+                <div id="countdown" class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
+                        <div id="days" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
+                        <div class="text-xs uppercase tracking-wider">Days</div>
+                    </div>
+                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
+                        <div id="hours" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
+                        <div class="text-xs uppercase tracking-wider">Hours</div>
+                    </div>
+                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
+                        <div id="minutes" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
+                        <div class="text-xs uppercase tracking-wider">Minutes</div>
+                    </div>
+                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
+                        <div id="seconds" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
+                        <div class="text-xs uppercase tracking-wider">Seconds</div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-sm text-fungal-light">Launching on: <span class="text-fungal-accent font-bold">June 11, 2025</span></div>
+                </div>
+            </div>
+            
+            <a href="#subscribe" class="inline-block bg-gradient-to-r from-fungal-primary to-fungal-accent text-white px-8 py-3 rounded-full text-lg font-bold hover:opacity-90 transition">
+                Get Early Access
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 px-6 bg-gradient-to-b from-fungal-dark/10 to-fungal-dark/40">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white">
+                <span class="relative inline-block">
+                    <span class="absolute -bottom-1 left-0 right-0 h-2 bg-fungal-accent/40"></span>
+                    <span class="relative fungi-logo text-fungal-light">WHAT'S COMING</span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-gamepad text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Web3 Gaming Platform</h3>
+                    <p class="text-fungal-light">Immerse yourself in a decentralized gaming universe with true ownership of in-game assets powered by blockchain technology.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-tasks text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Task-Based Rewards</h3>
+                    <p class="text-fungal-light">Complete daily challenges, quests, and missions to earn valuable rewards that actually have real-world value.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-coins text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Earn Crypto Coin</h3>
+                    <p class="text-fungal-light">Our native $FUNGU token rewards players for their time and achievements in the ecosystem.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-users text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Community Driven</h3>
+                    <p class="text-fungal-light">Players govern the platform through decentralized decision-making with $FUNGU tokens deciding game directions.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-wallet text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Wallet Integration</h3>
+                    <p class="text-fungal-light">Seamless connection with major Web3 wallets like MetaMask, WalletConnect, and more for easy asset management.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
+                    <div class="text-fungal-accent mb-4">
+                        <i class="fas fa-crown text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Exclusive NFTs</h3>
+                    <p class="text-fungal-light">Collect limited edition in-game NFTs that provide special abilities, cosmetics, and access to VIP areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="subscribe" class="py-20 px-6 bg-gradient-to-b from-fungal-dark/40 to-fungal-dark/80">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-white">Stay Updated</h2>
+            <p class="text-center text-fungal-light mb-10 max-w-2xl mx-auto">Join our waitlist to get early access, exclusive updates, and early adopter rewards when we launch.</p>
+            
+            <div class="bg-fungal-dark/70 p-8 rounded-xl border border-fungal-primary/30">
+                <form id="emailForm" class="space-y-4" action="https://formspree.io/f/xblylyaj" method="POST">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-fungal-light mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" required class="email-input w-full bg-[rgba(15,5,29,0.7)] border border-fungal-primary/60 rounded-lg px-4 py-3 text-white focus:border-fungal-primary transition" placeholder="your@email.com">
+                    </div>
+                    <button type="submit" class="submit-btn w-full bg-gradient-to-r from-fungal-primary to-fungal-accent text-white py-3 px-6 rounded-lg font-bold mt-6">
+                        Join Waitlist
+                    </button>
+                </form>
+
+                <div id="successMessage" class="hidden mt-4 p-4 bg-green-500/20 text-green-300 rounded-lg text-center">
+                    <i class="fas fa-check-circle mr-2"></i> Thank you! You've been added to our waitlist successfully.
+                </div>
+
+                <div id="errorMessage" class="hidden mt-4 p-4 bg-red-500/20 text-red-300 rounded-lg text-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i> <span id="errorText">Please enter a valid email address.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-fungal-dark/90 border-t border-fungal-primary/20">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="fungi-logo text-2xl text-fungal-light mb-4 md:mb-0">FUNGŪ</div>
+                
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="text-fungal-light hover:text-fungal-accent transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-fungal-light hover:text-fungal-accent transition">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-fungal-light hover:text-fungal-accent transition">
+                        <i class="fab fa-telegram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-fungal-light hover:text-fungal-accent transition">
+                        <i class="fab fa-medium text-xl"></i>
+                    </a>
+                </div>
+                
+                <div class="text-sm text-fungal-light">
+                    &copy; 2025 FUNGŪ. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date("June 11, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerText = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+            
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "<div class='text-2xl text-fungal-accent font-bold'>FUNGŪ HAS LAUNCHED!</div>";
+            }
+        }
+        
+        updateCountdown();
+        const countdown = setInterval(updateCountdown, 1000);
+        
+        // Email Form Submission
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Simple validation
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                document.getElementById('errorText').textContent = 'Please enter a valid email address.';
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => errorMessage.classList.add('hidden'), 5000);
+                return;
+            }
+
+            // Submit the form (let Formspree handle it)
+            this.submit();
+
+            // Optionally show success message (Formspree can redirect or show its own)
+            // successMessage.classList.remove('hidden');
+            // document.getElementById('emailForm').reset();
+            // setTimeout(() => successMessage.classList.add('hidden'), 5000);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide mobile menu on link click
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
