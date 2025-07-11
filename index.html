@@ -3,262 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUNGŪ - Web3 Gaming Platform Coming Soon</title>
+    <title>FUNGŪ - Web3 Gaming Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add favicon/logo link here -->
     <link rel="icon" type="image/png" href="logo.png">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'fungal-dark': '#2a0c4e',
-                        'fungal-primary': '#7b2cbf',
-                        'fungal-light': '#e0aaff',
-                        'fungal-accent': '#ff9e00',
+                        'game-dark': '#0a0a0f',
+                        'game-blue': '#1a1a2e',
+                        'game-purple': '#16213e',
+                        'game-accent': '#00d4ff',
+                        'game-secondary': '#8b5cf6',
+                        'game-glow': '#00ffff',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        fungi: ['"Press Start 2P"', 'cursive']
+                        game: ['"Orbitron"', 'monospace']
                     },
+                    animation: {
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                        'matrix': 'matrix 20s linear infinite',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
         
         body {
-            background-color: #0f051d;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
             color: white;
             overflow-x: hidden;
         }
         
-        .fungi-logo {
-            font-family: '"Press Start 2P"', cursive;
-            text-shadow: 0 0 10px rgba(123, 44, 191, 0.7);
+        .game-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            letter-spacing: 0.1em;
         }
         
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
+        .cyber-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
         }
         
-        @keyframes glow {
+        @keyframes pulse-glow {
             from {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #7b2cbf, 0 0 20px #7b2cbf;
+                text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 30px #00d4ff;
+                transform: scale(1);
             }
             to {
-                text-shadow: 0 0 10px #fff, 0 0 15px #e0aaff, 0 0 20px #e0aaff, 0 0 25px #e0aaff;
+                text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+                transform: scale(1.02);
             }
         }
         
-        .pixel-box {
-            border: 4px solid #7b2cbf;
-            position: relative;
-            box-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
-        .pixel-box::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            right: -8px;
-            bottom: -8px;
-            border: 2px solid #e0aaff;
+        @keyframes matrix {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
+            opacity: 0.1;
         }
         
-        .countdown-box {
-            background: rgba(42, 12, 78, 0.7);
-            border: 2px solid #ff9e00;
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            animation: matrix 20s linear infinite;
+            text-shadow: 0 0 5px currentColor;
         }
         
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(123, 44, 191, 0.4);
-        }
-        
-        .email-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
-        }
-        
-        .submit-btn {
+        .cyber-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
         
-        .submit-btn:hover {
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, transparent, #00d4ff, transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cyber-card:hover::before {
+            opacity: 1;
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .hero-grid {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .neon-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            border: 2px solid #00d4ff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .neon-button:hover::before {
+            left: 100%;
+        }
+        
+        .neon-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(224, 170, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #0a0a0f;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .slide-up {
+            animation: slide-up 0.6s ease-out forwards;
+        }
+        
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .email-input {
+            background: rgba(26, 26, 46, 0.8);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .email-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            outline: none;
         }
     </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col">
+<body class="font-sans min-h-screen">
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
     <!-- Navigation -->
-    <nav class="px-6 py-4 flex justify-between items-center bg-[rgba(15,5,29,0.8)] backdrop-blur-sm relative">
-        <!-- Add logo image beside FUNGŪ text -->
-        <div class="flex items-center fungi-logo text-2xl text-fungal-light">
-            <img src="logo.png" alt="FUNGŪ Logo" class="h-8 w-8 mr-2">
-            FUNGŪ
+    <nav class="navbar-blur fixed top-0 left-0 right-0 px-6 py-4 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center game-logo text-2xl text-game-accent">
+                <img src="logo.png" alt="FUNGŪ Logo" class="h-8 w-8 mr-3">
+                FUNGŪ
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8" id="desktopMenu">
+                <a href="#features" class="text-white hover:text-game-accent transition-colors duration-300">Features</a>
+                <a href="#roadmap" class="text-white hover:text-game-accent transition-colors duration-300">Roadmap</a>
+                <a href="#subscribe" class="text-white hover:text-game-accent transition-colors duration-300">Join Beta</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" id="mobileMenuButton" aria-label="Open menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-6" id="desktopMenu">
-            <a href="#features" class="text-white hover:text-fungal-light transition">Features</a>
-            <a href="#countdown" class="text-white hover:text-fungal-light transition">Countdown</a>
-            <a href="#subscribe" class="text-white hover:text-fungal-light transition">Subscribe</a>
-        </div>
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden text-white" id="mobileMenuButton" aria-label="Open menu">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
         <!-- Mobile Menu -->
-        <div class="absolute top-full left-0 w-full bg-[rgba(15,5,29,0.97)] flex-col space-y-2 py-4 px-6 z-20 shadow-lg hidden" id="mobileMenu">
-            <a href="#features" class="block text-white hover:text-fungal-light transition">Features</a>
-            <a href="#countdown" class="block text-white hover:text-fungal-light transition">Countdown</a>
-            <a href="#subscribe" class="block text-white hover:text-fungal-light transition">Subscribe</a>
+        <div class="absolute top-full left-0 w-full bg-game-dark/95 backdrop-blur-md flex-col space-y-4 py-6 px-6 z-20 shadow-lg hidden" id="mobileMenu">
+            <a href="#features" class="block text-white hover:text-game-accent transition-colors duration-300">Features</a>
+            <a href="#roadmap" class="block text-white hover:text-game-accent transition-colors duration-300">Roadmap</a>
+            <a href="#subscribe" class="block text-white hover:text-game-accent transition-colors duration-300">Join Beta</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="flex-grow flex flex-col justify-center items-center text-center px-4 py-12 md:py-24 relative overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-fungal-dark/20 to-fungal-dark"></div>
-            <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237b2cbf' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E');"></div>
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 py-20 relative overflow-hidden">
+        <div class="hero-grid absolute inset-0 z-0 opacity-20"></div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <div class="mb-12 slide-up">
+                <div class="text-7xl md:text-9xl mb-6 game-logo cyber-glow">FUNGŪ</div>
+                <div class="text-xl md:text-2xl text-game-accent mb-8 font-game">
+                    <span class="inline-block">NEXT-GEN</span>
+                    <span class="inline-block mx-2 text-game-glow">•</span>
+                    <span class="inline-block">WEB3</span>
+                    <span class="inline-block mx-2 text-game-glow">•</span>
+                    <span class="inline-block">GAMING</span>
+                </div>
+            </div>
+            
+            <div class="cyber-card p-8 md:p-12 mb-12 rounded-2xl slide-up">
+                <h1 class="text-4xl md:text-6xl font-bold mb-8 text-white game-logo">
+                    ENTER THE <span class="text-game-accent">METAVERSE</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    A revolutionary gaming ecosystem where blockchain meets immersive gameplay. 
+                    Own your assets, earn real value, and shape the future of decentralized gaming.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#subscribe" class="neon-button text-white px-8 py-4 rounded-full text-lg font-bold font-game relative z-10">
+                        <i class="fas fa-rocket mr-2"></i>
+                        START PLAYING
+                    </a>
+                    <a href="#features" class="border-2 border-game-accent text-game-accent hover:bg-game-accent hover:text-game-dark px-8 py-4 rounded-full text-lg font-bold font-game transition-all duration-300">
+                        <i class="fas fa-play mr-2"></i>
+                        EXPLORE FEATURES
+                    </a>
+                </div>
+            </div>
         </div>
         
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <div class="mb-8">
-                <div class="text-6xl md:text-8xl mb-4 fungi-logo glow">FUNGŪ</div>
-                <div class="text-lg md:text-xl text-fungal-light mb-6">The future of decentralized gaming is growing...</div>
-            </div>
-            
-            <div class="pixel-box p-8 mb-12 bg-fungal-dark/80">
-                <h1 class="text-3xl md:text-5xl font-bold mb-6 text-white">WEB3 GAMING ECOSYSTEM COMING SOON</h1>
-                <p class="text-lg md:text-xl text-fungal-light mb-8">A revolutionary platform where gaming meets blockchain technology. Play, earn, and connect in a decentralized world.</p>
-                
-                <div id="countdown" class="flex flex-wrap justify-center gap-4 mb-8">
-                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
-                        <div id="days" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
-                        <div class="text-xs uppercase tracking-wider">Days</div>
-                    </div>
-                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
-                        <div id="hours" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
-                        <div class="text-xs uppercase tracking-wider">Hours</div>
-                    </div>
-                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
-                        <div id="minutes" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
-                        <div class="text-xs uppercase tracking-wider">Minutes</div>
-                    </div>
-                    <div class="countdown-box w-20 h-20 xs:w-24 xs:h-24 flex flex-col items-center justify-center rounded-lg">
-                        <div id="seconds" class="text-2xl xs:text-3xl font-bold text-fungal-accent">00</div>
-                        <div class="text-xs uppercase tracking-wider">Seconds</div>
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <div class="text-sm text-fungal-light">Launching on: <span class="text-fungal-accent font-bold">June 16, 2025</span></div>
-                </div>
-            </div>
-            
-            <a href="#subscribe" class="inline-block bg-gradient-to-r from-fungal-primary to-fungal-accent text-white px-8 py-3 rounded-full text-lg font-bold hover:opacity-90 transition">
-                Get Early Access
-            </a>
-        </div>
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-4 h-4 bg-game-accent rounded-full opacity-50 animate-float"></div>
+        <div class="absolute top-40 right-20 w-6 h-6 bg-game-secondary rounded-full opacity-30 animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-8 h-8 bg-game-glow rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 px-6 bg-gradient-to-b from-fungal-dark/10 to-fungal-dark/40">
+    <section id="features" class="py-20 px-6 relative">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white">
-                <span class="relative inline-block">
-                    <span class="absolute -bottom-1 left-0 right-0 h-2 bg-fungal-accent/40"></span>
-                    <span class="relative fungi-logo text-fungal-light">CORE FEATURES</span>
-                </span>
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white game-logo">
+                    GAME <span class="text-game-accent">FEATURES</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Experience the future of gaming with cutting-edge Web3 technology
+                </p>
+            </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-gamepad text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-cube"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">True Asset Ownership</h3>
-                    <p class="text-fungal-light">Own and trade in-game assets as NFTs with real value.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">TRUE OWNERSHIP</h3>
+                    <p class="text-gray-300 leading-relaxed">Own your in-game assets as NFTs. Trade, sell, or collect rare items with real-world value.</p>
                 </div>
                 
                 <!-- Feature 2 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-coins text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Play-to-Earn</h3>
-                    <p class="text-fungal-light">Earn $FUNGU tokens through gameplay and achievements.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">EARN REWARDS</h3>
+                    <p class="text-gray-300 leading-relaxed">Earn $FUNGU tokens through gameplay, tournaments, and community participation.</p>
                 </div>
                 
                 <!-- Feature 3 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-users text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">DAO Governance</h3>
-                    <p class="text-fungal-light">Token holders vote on platform evolution.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">GUILD SYSTEM</h3>
+                    <p class="text-gray-300 leading-relaxed">Join guilds, participate in DAO governance, and shape the game's future together.</p>
                 </div>
                 
                 <!-- Feature 4 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-wallet text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Multi-Chain Support</h3>
-                    <p class="text-fungal-light">Connect any Web3 wallet across major chains.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">SECURE WALLET</h3>
+                    <p class="text-gray-300 leading-relaxed">Multi-chain support with enterprise-grade security for your digital assets.</p>
                 </div>
                 
                 <!-- Feature 5 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-trophy text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Competitive Leagues</h3>
-                    <p class="text-fungal-light">Tournaments with crypto prize pools.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">ESPORTS READY</h3>
+                    <p class="text-gray-300 leading-relaxed">Compete in tournaments with massive crypto prize pools and global recognition.</p>
                 </div>
                 
                 <!-- Feature 6 -->
-                <div class="feature-card bg-fungal-dark/80 p-6 rounded-xl border border-fungal-primary/30 transition-all duration-300 cursor-default">
-                    <div class="text-fungal-accent mb-4">
-                        <i class="fas fa-crown text-4xl"></i>
+                <div class="cyber-card p-8 rounded-xl text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">VIP NFT Perks</h3>
-                    <p class="text-fungal-light">Exclusive benefits for collectors.</p>
+                    <h3 class="text-xl font-bold text-white mb-4 font-game">METAVERSE</h3>
+                    <p class="text-gray-300 leading-relaxed">Explore vast virtual worlds with immersive gameplay and social experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 px-6 bg-gradient-to-b from-game-blue/20 to-game-purple/20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white game-logo">
+                    GAME <span class="text-game-accent">ROADMAP</span>
+                </h2>
+                <p class="text-xl text-gray-300">The journey to the ultimate Web3 gaming experience</p>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="cyber-card p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-game-accent rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-rocket text-game-dark"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-game">PHASE 1: ALPHA LAUNCH</h3>
+                            <p class="text-game-accent">Q2 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">Core gameplay mechanics, NFT integration, and basic token economy.</p>
+                </div>
+                
+                <div class="cyber-card p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-game-secondary rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-users text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-game">PHASE 2: COMMUNITY</h3>
+                            <p class="text-game-accent">Q3 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">Guild system, DAO governance, and competitive tournaments.</p>
+                </div>
+                
+                <div class="cyber-card p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-game-glow rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-globe text-game-dark"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-game">PHASE 3: METAVERSE</h3>
+                            <p class="text-game-accent">Q4 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">Full metaverse integration, virtual real estate, and cross-platform play.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Newsletter Section -->
-    <section id="subscribe" class="py-20 px-6 bg-gradient-to-b from-fungal-dark/40 to-fungal-dark/80">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-white">Stay Updated</h2>
-            <p class="text-center text-fungal-light mb-10 max-w-2xl mx-auto">Join our waitlist to get early access, exclusive updates, and early adopter rewards when we launch.</p>
+    <section id="subscribe" class="py-20 px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white game-logo">
+                JOIN THE <span class="text-game-accent">REVOLUTION</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-12">
+                Be among the first to experience the future of Web3 gaming. Get exclusive access to beta releases and early adopter rewards.
+            </p>
             
-            <div class="bg-fungal-dark/70 p-8 rounded-xl border border-fungal-primary/30">
-                <form id="emailForm" class="space-y-4" action="https://formspree.io/f/xblylyaj" method="POST">
+            <div class="cyber-card p-8 rounded-xl">
+                <form id="emailForm" class="space-y-6" action="https://formspree.io/f/xblylyaj" method="POST">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-fungal-light mb-2">Email Address</label>
-                        <input type="email" id="email" name="email" required class="email-input w-full bg-[rgba(15,5,29,0.7)] border border-fungal-primary/60 rounded-lg px-4 py-3 text-white focus:border-fungal-primary transition" placeholder="your@email.com">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-3 font-game">EMAIL ADDRESS</label>
+                        <input type="email" id="email" name="email" required 
+                               class="email-input w-full px-6 py-4 rounded-full text-white font-game text-center text-lg" 
+                               placeholder="your@email.com">
                     </div>
-                    <button type="submit" class="submit-btn w-full bg-gradient-to-r from-fungal-primary to-fungal-accent text-white py-3 px-6 rounded-lg font-bold mt-6">
-                        Join Waitlist
+                    <button type="submit" class="neon-button w-full py-4 px-8 rounded-full font-bold text-lg font-game">
+                        <i class="fas fa-gamepad mr-2"></i>
+                        START YOUR JOURNEY
                     </button>
                 </form>
 
-                <div id="successMessage" class="hidden mt-4 p-4 bg-green-500/20 text-green-300 rounded-lg text-center">
-                    <i class="fas fa-check-circle mr-2"></i> Thank you! You've been added to our waitlist successfully.
+                <div id="successMessage" class="hidden mt-6 p-4 bg-green-500/20 text-green-300 rounded-lg text-center">
+                    <i class="fas fa-check-circle mr-2"></i> Welcome to the FUNGŪ universe! Check your email for next steps.
                 </div>
 
-                <div id="errorMessage" class="hidden mt-4 p-4 bg-red-500/20 text-red-300 rounded-lg text-center">
+                <div id="errorMessage" class="hidden mt-6 p-4 bg-red-500/20 text-red-300 rounded-lg text-center">
                     <i class="fas fa-exclamation-circle mr-2"></i> <span id="errorText">Please enter a valid email address.</span>
                 </div>
             </div>
@@ -266,58 +443,58 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-6 bg-fungal-dark/90 border-t border-fungal-primary/20">
+    <footer class="py-12 px-6 bg-game-dark/50 border-t border-game-accent/20">
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="fungi-logo text-2xl text-fungal-light mb-4 md:mb-0">FUNGŪ</div>
+                <div class="game-logo text-2xl text-game-accent mb-6 md:mb-0">FUNGŪ</div>
                 
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="https://x.com/FUNGUgames?t=j4HDbaYlEk0f3m0Jr7p36A&s=09" class="text-fungal-light hover:text-fungal-accent transition">
-                        <i class="fab fa-twitter text-xl"></i>
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="https://x.com/FUNGUgames?t=j4HDbaYlEk0f3m0Jr7p36A&s=09" class="text-gray-400 hover:text-game-accent transition-colors duration-300">
+                        <i class="fab fa-twitter text-2xl"></i>
                     </a>
-                    <a href="https://discord.gg/eC2uMtQXGb" class="text-fungal-light hover:text-fungal-accent transition">
-                        <i class="fab fa-discord text-xl"></i>
+                    <a href="https://discord.gg/eC2uMtQXGb" class="text-gray-400 hover:text-game-accent transition-colors duration-300">
+                        <i class="fab fa-discord text-2xl"></i>
                     </a>
-                    <a href="https://t.me/Fungutoken" class="text-fungal-light hover:text-fungal-accent transition">
-                        <i class="fab fa-telegram text-xl"></i>
+                    <a href="https://t.me/Fungutoken" class="text-gray-400 hover:text-game-accent transition-colors duration-300">
+                        <i class="fab fa-telegram text-2xl"></i>
                     </a>
-                    <a href="#" class="text-fungal-light hover:text-fungal-accent transition">
-                        <i class="fab fa-medium text-xl"></i>
+                    <a href="#" class="text-gray-400 hover:text-game-accent transition-colors duration-300">
+                        <i class="fab fa-medium text-2xl"></i>
                     </a>
                 </div>
                 
-                <div class="text-sm text-fungal-light">
-                    &copy; 2025 FUNGŪ. All rights reserved.
+                <div class="text-sm text-gray-400 font-game">
+                    &copy; 2025 FUNGŪ. ALL RIGHTS RESERVED.
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Countdown Timer
-        function updateCountdown() {
-            const launchDate = new Date("June 16, 2025 00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = launchDate - now;
+        // Matrix Background Effect
+        function createMatrixEffect() {
+            const matrixBg = document.getElementById('matrixBg');
+            const chars = '01FUNGU';
             
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById("days").innerText = days.toString().padStart(2, "0");
-            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
-            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
-            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
-            
-            if (distance < 0) {
-                clearInterval(countdown);
-                document.getElementById("countdown").innerHTML = "<div class='text-2xl text-fungal-accent font-bold'>FUNGŪ HAS LAUNCHED!</div>";
+            for (let i = 0; i < 50; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDelay = Math.random() * 20 + 's';
+                column.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                
+                matrixBg.appendChild(column);
             }
         }
         
-        updateCountdown();
-        const countdown = setInterval(updateCountdown, 1000);
+        // Initialize matrix effect
+        createMatrixEffect();
         
         // Email Form Submission
         document.getElementById('emailForm').addEventListener('submit', function(e) {
@@ -327,7 +504,6 @@
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
 
-            // Simple validation
             if (!email || !email.includes('@') || !email.includes('.')) {
                 document.getElementById('errorText').textContent = 'Please enter a valid email address.';
                 errorMessage.classList.remove('hidden');
@@ -335,22 +511,20 @@
                 return;
             }
 
-            // Submit the form (let Formspree handle it)
             this.submit();
-
-            // Optionally show success message (Formspree can redirect or show its own)
-            // successMessage.classList.remove('hidden');
-            // document.getElementById('emailForm').reset();
-            // setTimeout(() => successMessage.classList.add('hidden'), 5000);
         });
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
         
@@ -366,6 +540,24 @@
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-up');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.cyber-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
